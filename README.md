@@ -6,5 +6,5 @@
 ## Practice Workbook Repos
 
 ## Certification Repos
-* [OpenClassrooms](https://)
-* [Front End Development Libraries](https://)
+* [OpenClassrooms - Front End Develeoper Diploma Projects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
+* [FreeCodeCamp.org - Front End Development Libraries](https://)
