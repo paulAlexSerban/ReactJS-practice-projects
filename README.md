@@ -1,7 +1,7 @@
 # ReactJS Development
 
 ## POC Project Repos
-* [Restaurant Review App - SPA](https://github.com/paulAlexSerban/ReactJS-Restaurant-Review-App) -- [Live DEMO](https://restaurant-review-app-react.netlify.app/)
+* [Restaurant Review App - SPA](https://github.com/paulAlexSerban/Restaurant-Review-App---ReactJS-SPA) -- [Live DEMO](https://restaurant-review-app-react.netlify.app/)
 
 ## Practice Workbook Repos
 
