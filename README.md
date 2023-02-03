@@ -11,6 +11,9 @@
 ### NextJS
 * [DevSpace - Blog](https://github.com/paulAlexSerban/prj--devspace-blog)
 
+## Workbooks
+* [React.js Workbook](https://github.com/paulAlexSerban/wbk--reactjs)
+
 ## Certification Repos
 * [OpenClassrooms - Front End Develeoper Diploma Projects](https://github.com/paulAlexSerban/OpenClassrooms-FrontEnd-Developer-Diploma-Projects)
 * [FreeCodeCamp.org - Front End Development Libraries](https://)
