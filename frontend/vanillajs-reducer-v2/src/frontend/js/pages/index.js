@@ -1,83 +1,78 @@
-(() => {
-    // Action Types
-    const INCREMENT = 'INCREMENT';
-    const DECREMENT = 'DECREMENT';
+import { createStore } from './store';
+import { setActiveItemAction, toggleSubmenuAction, setTargetDeviceAction } from './actions';
+/* eslint-disable */
+const store = createStore();
 
-    // Initial state
-    const initialState = {
-        counter: 0,
-    };
+// Check if the element should be active and update its 'active' class status
+const toggleActiveClass = (element, shouldBeActive) => {
+    const isActive = element.classList.contains('active');
+    if (isActive && !shouldBeActive) {
+        element.classList.remove('active');
+    } else if (!isActive && shouldBeActive) {
+        element.classList.add('active');
+    }
+};
 
-    // Action functions
-    const incrementAction = (state) => ({ ...state, counter: state.counter + 1 });
-    const decrementAction = (state) => ({ ...state, counter: state.counter - 1 });
+// Update classes for a single item based on the selected item ID
+const updateSingleItem = (item, selectedItemId) => {
+    toggleActiveClass(item, item.id === selectedItemId);
+};
 
-    // Action type mapping
-    const actionTypes = {
-        [INCREMENT]: incrementAction,
-        [DECREMENT]: decrementAction,
-        default: (state) => state,
-    };
+// Update parent classes based on the selected item
+const updateParentItems = (selectedItem) => {
+    let parent = selectedItem && selectedItem.parentNode.closest('.menu-item');
+    while (parent) {
+        toggleActiveClass(parent, true);
+        parent = parent.parentNode.closest('.menu-item');
+    }
+};
 
-    // Reducer function
-    const reducerDefinition = (state = initialState, action) => {
-        const actionFunc = actionTypes[action.type] || actionTypes.default;
-        return actionFunc(state, action);
-    };
+// Main function to update all classes based on the current state
+const updateActiveClasses = () => {
+    const state = store.getState();
+    const selectedItemId = state.selected;
+    const allMenuItems = document.querySelectorAll('.menu-item');
 
-    // Store creation function
-    const createStore = (reducer) => {
-        let state = reducer(undefined, {});
-        let listeners = [];
+    // Update classes for each menu item
+    allMenuItems.forEach((item) => updateSingleItem(item, selectedItemId));
 
-        // Integrate Redux DevTools
-        const devTools =
-            window.__REDUX_DEVTOOLS_EXTENSION__ &&
-            window.__REDUX_DEVTOOLS_EXTENSION__.connect({
-                name: 'VanillaJS Redux',
-                trace: true,
-            });
-        if (devTools) {
-            devTools.init(state); // Initialize DevTools with the initial state
-        }
+    // Update parent items
+    const selectedItem = document.getElementById(selectedItemId);
+    if (selectedItem) {
+        updateParentItems(selectedItem);
+    }
+};
 
-        // Public API
-        return {
-            getState: () => state,
-            dispatch: (action) => {
-                state = reducer(state, action);
+// Subscribe to state changes
+const unsubscribe = store.subscribe(() => {
+    updateActiveClasses();
+});
 
-                // Send the new state to Redux DevTools
-                if (devTools) {
-                    devTools.send(action, state);
-                }
+document.addEventListener('DOMContentLoaded', () => {
+    // Initial render
+    updateActiveClasses();
 
-                listeners.forEach((listener) => listener());
-            },
-            subscribe: (listener) => {
-                listeners.push(listener);
-                return () => {
-                    listeners = listeners.filter((l) => l !== listener);
-                };
-            },
-        };
-    };
+    // Add click event listeners to menu items
+    document.querySelectorAll('.menu-item').forEach((item) => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const itemId = e.currentTarget.id;
 
-    // Application logic
-    (() => {
-        const store = createStore(reducerDefinition);
-
-        const unsubscribe = store.subscribe(() => {
-            /* eslint-disable */
-            console.log('New state:', store.getState());
+            try {
+                store.dispatch(setActiveItemAction(itemId));
+                store.dispatch(toggleSubmenuAction(itemId));
+                // store.dispatch(setTargetDeviceAction('desktop')))
+            } catch (error) {
+                console.error('An error occurred:', error);
+            }
         });
+    });
 
-        // Dispatch actions
-        store.dispatch({ type: INCREMENT });
-        store.dispatch({ type: INCREMENT });
-        store.dispatch({ type: DECREMENT });
-
-        // Unsubscribe from the store
-        unsubscribe();
-    })();
-})();
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            store.dispatch(setTargetDeviceAction('desktop'))
+        } else {
+            store.dispatch(setTargetDeviceAction('mobile'))
+        }
+    });
+});
