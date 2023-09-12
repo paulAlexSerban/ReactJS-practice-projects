@@ -6,7 +6,7 @@ const setInitialStateFromHTML = () => {
   };
 
   menuItems.forEach((item) => {
-      const id = item.id;
+      const {id} = item;
       const title = item.textContent.trim();
       const level = getNestingLevel(item);
       const submenu = [];
