@@ -15,12 +15,4 @@ export const toggleSubmenu = (state, action) => {
     };
 };
 
-export const handleDeviceChange = (state, action) => {
-    const { isMobile } = action.payload;
-    return {
-        ...state,
-        isMobile,
-    };
-};
-
 export const defaultHandler = (state) => state;

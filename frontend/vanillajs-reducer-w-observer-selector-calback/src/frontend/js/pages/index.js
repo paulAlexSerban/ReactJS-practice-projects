@@ -1,5 +1,5 @@
 import { createStore } from './store';
-import { setActiveItemAction, toggleSubmenuAction, setTargetDeviceAction } from './actions';
+import { setActiveItemAction, toggleSubmenuAction } from './actions';
 /* eslint-disable */
 const store = createStore();
 
@@ -29,6 +29,7 @@ const updateParentItems = (selectedItem) => {
 
 // Main function to update all classes based on the current state
 const updateActiveClasses = () => {
+    console.log('Updating active classes');
     const state = store.getState();
     const selectedItemId = state.selected;
     const allMenuItems = document.querySelectorAll('.menu-item');
@@ -43,8 +44,8 @@ const updateActiveClasses = () => {
     }
 };
 
-// Subscribe to state changes
-const unsubscribe = store.subscribe(() => {
+// // Subscribe to state changes
+store.subscribe('active', () => {
     updateActiveClasses();
 });
 
@@ -57,22 +58,15 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', (e) => {
             e.stopPropagation();
             const itemId = e.currentTarget.id;
-
-            try {
-                store.dispatch(setActiveItemAction(itemId));
-                store.dispatch(toggleSubmenuAction(itemId));
-                // store.dispatch(setTargetDeviceAction('desktop')))
-            } catch (error) {
-                console.error('An error occurred:', error);
-            }
+            store.dispatch(setActiveItemAction(itemId));
+            store.dispatch(toggleSubmenuAction(itemId));
         });
     });
+});
 
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            store.dispatch(setTargetDeviceAction('desktop'))
-        } else {
-            store.dispatch(setTargetDeviceAction('mobile'))
-        }
-    });
+store.observeProperty('active', () => {
+    console.log('active property changed')
+});
+store.observeProperty('selected', () => {
+    console.log('selected property changed')
 });

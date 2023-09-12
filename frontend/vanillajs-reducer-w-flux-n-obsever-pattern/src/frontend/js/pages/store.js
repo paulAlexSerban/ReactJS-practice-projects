@@ -19,9 +19,7 @@ export const createStore = () => {
 
     // Call property-specific observers if a property changes
     const notifyPropertyObservers = (prevState, currentState) => {
-        console.log('Previous state:', prevState);
         for (const property in propertyObservers) {
-            console.log('Notifying property observers:', property);
             if (prevState[property] !== currentState[property]) {
                 propertyObservers[property].forEach((callback) => callback(currentState));
             }

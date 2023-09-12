@@ -5,7 +5,9 @@ const store = createStore();
 // Check if the element should be active and update its 'active' class status
 const toggleActiveClass = (itemId, shouldBeActive) => {
     const element = document.getElementById(itemId);
-    if (!element) return;
+    if (!element) {
+      return;
+    }
     const isActive = element.classList.contains('active');
     if (isActive && !shouldBeActive) {
         element.classList.remove('active');
@@ -35,7 +37,9 @@ const updateParentItems = (selectedItem) => {
 // Main function to update all classes based on the current state
 const updateActiveClasses = (newState) => {
     console.log('Updating active classes with:', newState);
-    if (!newState) return;
+    if (!newState) {
+      return;
+    }
     const { selected: selectedItemId, items } = newState;
 
     // Update for single items

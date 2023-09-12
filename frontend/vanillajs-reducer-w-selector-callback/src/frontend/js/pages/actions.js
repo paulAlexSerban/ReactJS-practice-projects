@@ -1,4 +1,4 @@
-import { SET_ACTIVE_ITEM, TOGGLE_SUBMENU, SET_TARGET_DEVICE } from './actionTypes';
+import { SET_ACTIVE_ITEM, TOGGLE_SUBMENU } from './actionTypes';
 
 export const setActiveItemAction = (payload) => {
     if (!payload || typeof payload !== 'string') {
@@ -14,9 +14,3 @@ export const toggleSubmenuAction = (payload) => {
     return { type: TOGGLE_SUBMENU, payload };
 };
 
-export const setTargetDeviceAction = (payload) => {
-    if (!payload || typeof payload !== 'string') {
-        throw new Error('Invalid payload for SET_TARGET_DEVICE');
-    }
-    return { type: SET_TARGET_DEVICE, payload };
-};
