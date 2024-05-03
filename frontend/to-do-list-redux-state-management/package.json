@@ -1,6 +1,8 @@
 {
-  "name": "redux-state-management",
+  "name": "@wbk--state-reducer-redux/to-do-list-redux-state-management",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "description": "",
   "scripts": {
     "watch": "export NODE_ENV=development && webpack serve --config webpack.dev.js --hot --progress",

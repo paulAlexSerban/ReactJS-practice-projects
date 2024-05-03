@@ -1,6 +1,8 @@
 {
-  "name": "@wbk--state-reducer-redux/vanillajs-reducer-w-selector-callback",
+  "name": "@wbk--state-reducer-redux/vanillajs-reducer-w-observer-selector-callback",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "description": "",
   "scripts": {
     "watch": "export NODE_ENV=development && webpack serve --config webpack.dev.js --hot --progress",

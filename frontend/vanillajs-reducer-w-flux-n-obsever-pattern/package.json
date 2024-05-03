@@ -1,6 +1,8 @@
 {
-  "name": "vanillajs-reducer",
+  "name": "@wbk--state-reducer-redux/vanillajs-reducer-w-flux-n-observer-pattern",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "description": "",
   "scripts": {
     "watch": "export NODE_ENV=development && webpack serve --config webpack.dev.js --hot --progress",

@@ -1,19 +1,33 @@
 {
-  "name": "wbk--state-reducer-redux",
+  "name": "@wbk--state-reducer-redux/core",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/paulAlexSerban/wbk--state-reducer-redux.git"
+  "devDependencies": {
+    "lerna": "^8.0.2"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/paulAlexSerban/wbk--state-reducer-redux/issues"
-  },
-  "homepage": "https://github.com/paulAlexSerban/wbk--state-reducer-redux#readme"
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "assets/*",
+      "assets/",
+      "backend/*",
+      "backend/**/*",
+      "database/*",
+      "frontend/*",
+      "frontend/**/*",
+      "shared/*",
+      "shared/**/*",
+      "tools/*"
+    ],
+    "nohoist": [
+      "**/normalize-scss",
+      "**/eslint-webpack-plugin"
+    ]
+  }
 }

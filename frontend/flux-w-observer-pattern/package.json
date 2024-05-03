@@ -1,6 +1,8 @@
 {
-  "name": "basic-flux",
+  "name": "@wbk--state-reducer-redux/flux-w-observer-pattern",
   "version": "1.0.0",
+  "private": true,
+  "type": "module",
   "description": "",
   "scripts": {
     "watch": "export NODE_ENV=development && webpack serve --config webpack.dev.js --hot --progress",
