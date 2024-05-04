@@ -45,3 +45,10 @@ const removeTaskAction = {
     }
 }
 ```
+
+# Reducer Function
+```js
+function reducer(state, action) {
+    // how to handle actions
+}
+```
