@@ -4,9 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
 const constants = require("./paths");
-const ESLintPlugin = require("eslint-webpack-plugin");
 
 // export webpack configuration
 module.exports = {
@@ -65,8 +63,6 @@ module.exports = {
 	},
 	// configure plugins
 	plugins: [
-		// use eslint to lint JavaScript code
-		new ESLintPlugin(),
 		// extract CSS styles into separate files
 		new MiniCssExtractPlugin({
 			filename: "styles/[name].css",
